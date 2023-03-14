@@ -93,6 +93,10 @@ class RedisSerializer(BaseSerializer):
             return None
         if value.startswith(b"!"):
             try:
+                import pickle5 as pickle
+            except Exception as e:
+                pass            
+            try:
                 return pickle.loads(value[1:])
             except pickle.PickleError:
                 return None
